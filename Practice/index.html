@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTO Services </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: #1e3c72;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: #ffcc00;
+    }
+
+    .section-title p {
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #1e3c72;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid #1e3c72;
+    }
+
+    .btn:hover {
+      background: transparent;
+      color: #1e3c72;
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #1e3c72;
+    }
+
+    .btn-outline:hover {
+      background: #1e3c72;
+      color: white;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      padding: 20px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .logo img {
+      height: 75px;
+      width: auto;
+    }
+
+    .logo-text h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .logo-text p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 25px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ffcc00;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+      background: none;
+      border: none;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('traffic.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      margin-top: 80px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .about {
+      background-color: white;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .about-img {
+      flex: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .about-img:hover img {
+      transform: scale(1.05);
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #2a5298;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .about-features {
+      margin: 30px 0;
+    }
+
+    .机床-features li {
+      margin-bottom: 15px;
+      padding-left: 25px;
+      position: relative;
+      color: #555;
+    }
+
+    .about-features li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #ffcc00;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1e3c72;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .events {
+      background-color: #f8f9fa;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-img {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .event-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .event-card:hover .event-img img {
+      transform: scale(1.1);
+    }
+
+    .event-info {
+      padding: 25px;
+    }
+
+    .event-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #1e3c72;
+    }
+
+    .event-date {
+      display: flex;
+      align-items: center;
+      color: #ff6b6b;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .event-date i {
+      margin-right: 8px;
+    }
+
+    .event-info p {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .speakers {
+      background-color: white;
+    }
+
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .speaker-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 30px 20px;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .speaker-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      border: 5px solid white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .speaker-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .speaker-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      color: #1e3c72;
+    }
+
+    .speaker-title {
+      color: #ff6b6b;
+      font-weight: 500;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .speaker-bio {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .speaker-specialties {
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      color: #555;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #1e3c72;
+      transform: translateY(-3px);
+    }
+
+    .program-info {
+      text-align: center;
+      margin-top: 50px;
+      padding: 30px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .program-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #1e3c72;
+    }
+
+    .program-info p {
+      max-width: 800px;
+      margin: 0 auto 20px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .contact {
+      background-color: #f8f9fa;
+    }
+
+    .contact-container {
+      display: flex;
+      gap: 50px;
+      margin-top: 40px;
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #1e3c72;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .info-item i {
+      font-size: 1.2rem;
+      color: #ffcc00;
+      margin-right: 15px;
+      margin-top: 5px;
+    }
+
+    .info-text h4 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .info-text p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .contact-form {
+      flex: 1;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #1e3c72;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+    }
+
+    .form-group textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background: #1e3c72;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: #2a5298;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background: #1e3c72;
+      color: white;
+      padding: 50px 0 20px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-col h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background: #ffcc00;
+    }
+
+    .footer-col p {
+      margin-bottom: 15px;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: white;
+      opacity: 0.8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      padding-left: 5px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.2rem;
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+
+    .newsletter-form {
+      margin-top: 15px;
+    }
+
+    .newsletter-form input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom p {
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 992px) {
+
+      .about-content,
+      .contact-container {
+        flex-direction: column;
+      }
+
+      .about-img {
+        margin-bottom: 30px;
+      }
+
+      .stats {
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        flex: 0 0 calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #1e3c72;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0 fikir, 0, 0, 0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .section-title h2 {
+        font-size: 1.6rem;
+      }
+
+      .event-info h3,
+      .speaker-info h3 {
+        font-size: 1.2rem;
+      }
+
+      .btn,
+      .submit-btn {
+        padding: 10px 20px;
+      }
+
+      .stat-item {
+        flex: 0 0 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="rtologo.jpg" alt="RTO Logo">
+          <div class="logo-text">
+            <h1>RTO SERVICES</h1>
+            <p>Welcome to Regional Transport Office</p>
+          </div>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="#events">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h2>Empowering Citizens, Driving Progress</h2>
+        <p>Your Gateway to Hassle-Free Transport Services.<br>
+          Access license applications, vehicle registrations, appointments, and more — all online</p>
+        <div class="hero-btns">
+          <a href="login.html" class="btn">Apply Now</a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>About RTO Priority Services Portal</h2>
+        <p>Learn about our commitment to simplifying regional transport services with transparency, speed, and
+          accessibility.</p>
+      </div>
+      <div class="about-content">
+        <div class="about-img">
+          <img src="i2.jpg" alt="About RTO Services">
+        </div>
+        <div class="about-text">
+          <h3>Our Journey</h3>
+          <p>Established in 2025, the RTO Priority Services Portal was launched to streamline access to essential
+            transport services. Designed with user convenience at its core, the portal connects citizens directly with
+            Regional Transport Offices for efficient and transparent service delivery.</p>
+
+          <h3>Our Mission</h3>
+          <p>To provide a seamless and user-friendly digital platform for availing key RTO services — reducing waiting
+            times, eliminating paperwork hassles, and ensuring a smooth experience for every citizen.</p>
+
+          <h3>Our Vision</h3>
+          <p>To revolutionize transport governance by enabling real-time access to priority RTO services through
+            innovative digital solutions and inclusive service models.</p>
+
+          <h3>What We Offer</h3>
+          <ul class="about-features">
+            <li>Online application and tracking for driving licenses</li>
+            <li>Vehicle registration and ownership transfer services</li>
+            <li>Smart scheduling for driving tests and appointments</li>
+            <li>Real-time status updates via SMS/email</li>
+            <li>Dedicated support for senior citizens and differently-abled individuals</li>
+            <li>Secure payment gateway for all government fees</li>
+          </ul>
+
+          <div class="stats">
+            <div class="stat-item">
+              <div class="stat-number">1.2L+</div>
+              <div class="stat-label">Users Served</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">25+</div>
+              <div class="stat-label">Services Integrated</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Paperless Workflow</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="events" id="events">
+    <div class="container">
+      <div class="section-title">
+        <h2>Services</h2>
+        <p>Access fast, transparent, and citizen-friendly transport services through our digital platform.</p>
+      </div>
+      <div class="events-grid">
+        <div class="event-card">
+          <div class="event-img">
+            <img src="i4.png" alt="Driving License Service">
+          </div>
+          <div class="event-info">
+            <h3>Driving License Application</h3>
+            <div class="event-date">
+              <i class="far fa-calendar-alt"></i> Available Daily | 24x7
+            </div>
+            <p>Apply for a learner or permanent driving license online. Book driving test slots, upload documents, and
+              track your status without visiting the RTO.</p>
+            <a href="license.html" class="btn">Apply Now</a>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-img">
+            <img src="i3.png" alt="Vehicle Registration">
+          </div>
+          <div class="event-info">
+            <h3>Vehicle Registration</h3>
+            <div class="event-date">
+              <i class="far fa-calendar-alt"></i> Available Daily | 24x7
+            </div>
+            <p>Register your new or used vehicle seamlessly. Submit online forms, pay applicable fees, and get your RC
+              delivered to your address.</p>
+            <a href="vehicle.html" class="btn">Register Vehicle</a>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-img">
+            <img src="i5.png" alt="Ownership Transfer">
+          </div>
+          <div class="event-info">
+            <h3>Ownership Transfer</h3>
+            <div class="event-date">
+              <i class="far fa-calendar-alt"></i> Available Daily | 24x7
+            </div>
+            <p>Transfer vehicle ownership easily after resale or inheritance. Upload required documents and track
+              approval status in real time.</p>
+            <a href="ownership.html" class="btn">Transfer Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact the RTO Support Team</h2>
+        <p>Need assistance with driving licenses, vehicle registration, or appointment scheduling? We're here to help.
+        </p>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Office Contact Details</h3>
+
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="info-text">
+              <h4>RTO Office Address</h4>
+              <p>RTO Division, Civil Lines, Pune, Maharashtra 411001</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div class="info-text">
+              <h4>Email</h4>
+              <p>support@maharashtrarto.gov.in</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <div class="info-text">
+              <h4>Helpline Number</h4>
+              <p>1800-123-4567 (Toll Free)</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <div class="info-text">
+              <h4>Working Hours</h4>
+              <p>Monday - Friday: 10:00 AM - 5:30 PM<br>Saturday: 10:00 AM - 2:00 PM</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-users"></i>
+            <div class="info-text">
+              <h4>Follow Us</h4>
+              <div class="social-links">
+                <a href="https://facebook.com/maharashtraroadtransport" aria-label="Facebook"><i
+                    class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/rto_maha" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/maharashtrarto" aria-label="LinkedIn"><i
+                    class="fab fa-linkedin-in"></i></a>
+                <a href="https://transport.maharashtra.gov.in" aria-label="Official Website"><i
+                    class="fas fa-globe"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" pattern="[A-Za-z\s]{3,}"
+                title="Enter at least 3 alphabetic characters" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title="Enter a valid email address" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Service Concern</label>
+              <input type="text" id="subject" name="subject" minlength="5" title="Enter a valid subject" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" rows="5" minlength="10" title="Please write at least 10 characters"
+                required></textarea>
+            </div>
+            <p id="contactMessage" class="form-feedback" style="display:none; color:green;"></p>
+            <button type="submit" class="submit-btn">Submit Request</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+
+        <div class="footer-col">
+          <h3>About RTO Portal</h3>
+          <p>This portal provides citizens with seamless access to essential transport services, including driving
+            license applications, vehicle registration, and appointment bookings with the Regional Transport Office.</p>
+          <div class="footer-social">
+            <a href="https://facebook.com/maharashtraroadtransport" aria-label="Facebook"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/rto_maha" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/rto_maharashtra" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/maharashtrarto" aria-label="LinkedIn"><i
+                class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#events">Our Services</a></li>
+            <li><a href="#apply">Apply Online</a></li>
+            <li><a href="#status">Application Status</a></li>
+            <li><a href="#faq">FAQs</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://parivahan.gov.in" target="_blank">Parivahan Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Important Notices</h3>
+          <ul class="footer-links">
+            <li><a href="#">Driving Test Schedule Updated – May 2025</a></li>
+            <li><a href="#">New Vehicle Registration Guidelines</a></li>
+            <li><a href="#">Online Payment System Maintenance – June 1</a></li>
+            <li><a href="#">Holiday Office Closure – August 15</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Subscribe for Updates</h3>
+          <p>Get the latest notifications on license renewal, policy changes, and service updates from the RTO office.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your Email Address" required>
+            <button type="submit" class="btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Maharashtra RTO Portal. All Rights Reserved. | Maintained by NIC</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+
+      mobileMenuBtn?.addEventListener('click', () => {
+        navLinks?.classList.toggle('active');
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', e => {
+          e.preventDefault();
+          const target = document.querySelector(anchor.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+          navLinks?.classList.remove('active');
+        });
+      });
+
+      // === Contact Form Validation ===
+      const contactForm = document.getElementById('contactForm');
+      const contactMessage = document.getElementById('contactMessage');
+
+      contactForm?.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = this.name.value.trim();
+        const email = this.email.value.trim();
+        const subject = this.subject.value.trim();
+        const message = this.message.value.trim();
+
+        const nameRegex = /^[A-Za-z\s]{3,}$/;
+        const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+        if (!nameRegex.test(name)) {
+          alert("Please enter a valid full name (at least 3 letters).");
+          return;
+        }
+
+        if (!emailRegex.test(email)) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        if (subject.length < 5) {
+          alert("Subject must be at least 5 characters.");
+          return;
+        }
+
+        if (message.length < 10) {
+          alert("Message must be at least 10 characters.");
+          return;
+        }
+
+        contactMessage.style.display = 'block';
+        contactMessage.textContent = 'Thank you for contacting the RTO. We will get back to you shortly.';
+
+        setTimeout(() => {
+          contactMessage.style.display = 'none';
+        }, 5000);
+
+        this.reset();
+      });
+
+      // === Newsletter Validation ===
+      const newsletterForms = document.querySelectorAll('.newsletter-form');
+
+      newsletterForms.forEach(form => {
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          const emailInput = form.querySelector('input[type="email"]');
+          const feedback = form.querySelector('.newsletter-feedback');
+          const email = emailInput.value.trim();
+          const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+          if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+          }
+
+          if (feedback) {
+            feedback.style.display = 'block';
+            feedback.textContent = `Thank you for subscribing with ${email}.`;
+            setTimeout(() => feedback.style.display = 'none', 5000);
+          } else {
+            alert(`Thank you for subscribing with ${email}.`);
+          }
+
+          emailInput.value = '';
+        });
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>

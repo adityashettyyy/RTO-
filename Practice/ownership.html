@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driving License Registration</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 15px auto;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url("o1.jpg");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Speakers Section */
+        .speakers {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .speaker-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .speaker-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .speaker-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .speaker-card:hover .speaker-image img {
+            transform: scale(1.1);
+        }
+
+        .speaker-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .speaker-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .speaker-info p {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .speaker-info .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .speaker-info .social-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .speaker-info .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Schedule Section */
+        .schedule {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .schedule-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background-color: var(--light-color);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .tab-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tab-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .schedule-content {
+            display: none;
+        }
+
+        .schedule-content.active {
+            display: block;
+        }
+
+        .schedule-item {
+            display: flex;
+            margin-bottom: 30px;
+            background-color: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .time {
+            flex: 0 0 150px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time span:first-child {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .event-details {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .event-speaker {
+            flex: 0 0 200px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .event-speaker img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .event-speaker h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .event-speaker p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Registration Section */
+        .registration {
+            padding: 100px 0;
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('l2.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .registration .section-title {
+            color: white;
+        }
+
+        .registration .section-title:after {
+            background-color: var(--accent-color);
+        }
+
+        .registration-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input.invalid,
+        .form-group select.invalid {
+            border: 2px solid var(--error-color);
+        }
+
+        .form-group .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.invalid .error-message {
+            display: block;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin-top: 10px;
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .event-details {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .event-speaker {
+                margin-top: 20px;
+                flex: 1;
+                width: 100%;
+                text-align: left;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .event-speaker img {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .schedule-item {
+                flex-direction: column;
+            }
+
+            .time {
+                flex: 1;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .speakers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Ownership<span>Transfer</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#documents">Documents</a></li>
+                    <li><a href="#register">Apply</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Vehicle Ownership Transfer Portal</h1>
+                <p>Initiate ownership transfer, upload documents, and track status — all in one place.</p>
+                <div class="hero-buttons">
+                    <a href="#register" class="btn">Apply Now</a>
+                    <a href="#services" class="btn btn-accent">Explore Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="about" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Simplifying Ownership Transfers</h2>
+                    <p>This portal allows you to transfer vehicle ownership easily — whether selling, inheriting, or
+                        gifting a vehicle. Complete the formalities online and avoid long queues.</p>
+                    <p>Also access services like RC update, insurance transfer assistance, address change, and NOC
+                        tracking.</p>
+                    <a href="#process" class="btn">Learn the Process</a>
+                </div>
+                <div class="about-image">
+                    <img src="o2.jpg" alt="Ownership Transfer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="speakers" id="process">
+        <div class="container">
+            <h2 class="section-title">Ownership Transfer Process</h2>
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-info">
+                        <h3>Step 1: Submit Application</h3>
+                        <p>Choose transfer type, enter vehicle details, and submit the online form.</p>
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="speaker-info">
+                        <h3>Step 2: Upload Documents</h3>
+                        <p>Upload RC, insurance, Form 29 & 30, ID proof, and NOC (if needed).</p>
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="speaker-info">
+                        <h3>Step 3: Verification</h3>
+                        <p>RTO verifies details and may request physical verification of vehicle.</p>
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="speaker-info">
+                        <h3>Step 4: RC Transfer</h3>
+                        <p>New RC is issued in the buyer’s name and delivered digitally or via post.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section class="schedule" id="documents">
+        <div class="container">
+            <h2 class="section-title">Documents Required</h2>
+
+            <div class="schedule-content active">
+                <div class="schedule-item">
+                    <div class="event-details">
+                        <h3>For Ownership Transfer</h3>
+                        <ul>
+                            <li>Original Registration Certificate (RC)</li>
+                            <li>Form 29 & Form 30 (duly filled)</li>
+                            <li>Valid Insurance Certificate</li>
+                            <li>Valid Pollution Under Control (PUC)</li>
+                            <li>Government-issued ID Proof (Both Seller & Buyer)</li>
+                            <li>No Objection Certificate (if vehicle is from another RTO)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration" id="register">
+        <div class="container">
+            <h2 class="section-title">Apply for Ownership Transfer</h2>
+            <div class="registration-form">
+                <form id="registrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">Seller's Name</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Buyer's Name</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicle-number">Vehicle Number</label>
+                        <input type="text" id="vehicle-number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="chassis-number">Chassis Number</label>
+                        <input type="text" id="chassis-number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Contact Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Mobile Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transfer-type">Transfer Type</label>
+                        <select id="transfer-type" required>
+                            <option value="">Select transfer type</option>
+                            <option value="sale">Sale</option>
+                            <option value="gift">Gift</option>
+                            <option value="inheritance">Inheritance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent">Submit Transfer Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Ownership Transfer Portal</h3>
+                    <p>This portal is developed to streamline the process of vehicle ownership transfer and improve
+                        accessibility to RTO services for citizens.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#documents">Documents</a></li>
+                        <li><a href="#register">Apply</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Support</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> RTO Division, Civil Lines, Pune, Maharashtra 411001</p>
+                    <p><i class="fas fa-phone"></i> 1800-123-4567 (Toll Free)</p>
+                    <p><i class="fas fa-envelope"></i> support@maharashtrarto.gov.in</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Maharashtra RTO Portal. All Rights Reserved. | Maintained by NIC</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script>
+    // Mobile Navigation Toggle
+    document.querySelector('.mobile-menu').addEventListener('click', () => {
+        document.querySelector('header nav ul').classList.toggle('active');
+    });
+
+    const registrationForm = document.getElementById('registrationForm');
+
+    // Helper functions
+    function showError(input, message) {
+        let errorMessage = input.nextElementSibling;
+        if (!errorMessage || !errorMessage.classList.contains('error-message')) {
+            errorMessage = document.createElement('div');
+            errorMessage.classList.add('error-message');
+            errorMessage.style.color = 'red';
+            errorMessage.style.fontSize = '13px';
+            errorMessage.style.marginTop = '4px';
+            input.parentNode.appendChild(errorMessage);
+        }
+        errorMessage.textContent = message;
+        input.classList.add('input-error');
+    }
+
+    function clearError(input) {
+        const errorMessage = input.nextElementSibling;
+        if (errorMessage && errorMessage.classList.contains('error-message')) {
+            errorMessage.remove();
+        }
+        input.classList.remove('input-error');
+    }
+
+    // Regex patterns
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10,15}$/;
+    const vehicleRegex = /^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/;
+    const chassisRegex = /^[A-Z0-9]{17}$/i;
+
+    // Individual validation functions
+    function validateName(input) {
+        const val = input.value.trim();
+        if (!val) {
+            showError(input, 'Name is required');
+            return false;
+        } else if (!nameRegex.test(val)) {
+            showError(input, 'Only letters and spaces allowed');
+            return false;
+        } else {
+            clearError(input);
+            return true;
+        }
+    }
+
+    function validatePhone(input) {
+        const val = input.value.trim();
+        if (!val) {
+            showError(input, 'Phone number is required');
+            return false;
+        } else if (!phoneRegex.test(val)) {
+            showError(input, 'Invalid phone number');
+            return false;
+        } else {
+            clearError(input);
+            return true;
+        }
+    }
+
+    function validateEmail(input) {
+        const val = input.value.trim();
+        if (!val || !emailRegex.test(val)) {
+            showError(input, 'Invalid email address');
+            return false;
+        } else {
+            clearError(input);
+            return true;
+        }
+    }
+
+    function validateVehicleNumber(input) {
+        const val = input.value.trim().toUpperCase();
+        if (!val) {
+            showError(input, 'Vehicle number is required');
+            return false;
+        } else if (!vehicleRegex.test(val)) {
+            showError(input, 'Format: e.g. MH12AB1234');
+            return false;
+        } else {
+            clearError(input);
+            return true;
+        }
+    }
+
+    function validateChassisNumber(input) {
+        const val = input.value.trim().toUpperCase();
+        if (!val) {
+            showError(input, 'Chassis number is required');
+            return false;
+        } else if (!chassisRegex.test(val)) {
+            showError(input, 'Must be 17 alphanumeric characters');
+            return false;
+        } else {
+            clearError(input);
+            return true;
+        }
+    }
+
+    function validateTransferType(input) {
+        if (!input.value) {
+            showError(input, 'Select a transfer type');
+            return false;
+        } else {
+            clearError(input);
+            return true;
+        }
+    }
+
+    // Real-time validation setup
+    document.getElementById('first-name').addEventListener('input', e => validateName(e.target));
+    document.getElementById('last-name').addEventListener('input', e => validateName(e.target));
+    document.getElementById('phone').addEventListener('input', e => validatePhone(e.target));
+    document.getElementById('email').addEventListener('input', e => validateEmail(e.target));
+    document.getElementById('vehicle-number').addEventListener('input', e => validateVehicleNumber(e.target));
+    document.getElementById('chassis-number').addEventListener('input', e => validateChassisNumber(e.target));
+
+    // Final validation on submit
+    registrationForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const firstName = document.getElementById('first-name');
+        const lastName = document.getElementById('last-name');
+        const phone = document.getElementById('phone');
+        const email = document.getElementById('email');
+        const vehicleNumber = document.getElementById('vehicle-number');
+        const chassisNumber = document.getElementById('chassis-number');
+        const transferType = document.getElementById('transfer-type');
+
+        let isValid = true;
+
+        if (!validateName(firstName)) isValid = false;
+        if (!validateName(lastName)) isValid = false;
+        if (!validatePhone(phone)) isValid = false;
+        if (!validateEmail(email)) isValid = false;
+        if (!validateVehicleNumber(vehicleNumber)) isValid = false;
+        if (!validateChassisNumber(chassisNumber)) isValid = false;
+        if (!validateTransferType(transferType)) isValid = false;
+
+        if (isValid) {
+            alert('Ownership Transfer Request Submitted Successfully!');
+            registrationForm.reset();
+        }
+    });
+</script>
+
+
+
+</body>
+
+</html>

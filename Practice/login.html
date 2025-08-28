@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-modal {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .login-modal h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .login-modal p {
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .login-modal input {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .login-submit {
+      background-color: #ff4d5f;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-submit:hover {
+      background-color: #e43e50;
+    }
+
+    .login-footer {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-footer a {
+      color: #ff4d5f;
+      text-decoration: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #ff4d5f;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Modal Overlay -->
+  <div class="overlay" id="loginOverlay" onclick="overlayClick(event)">
+    <div class="login-modal">
+      <span class="close-btn" onclick="closeLogin()">×</span>
+      <h2>Login</h2>
+      <p>Welcome back! Enter your credentials.</p>
+
+      <form id="loginForm" onsubmit="return validateLogin(event)">
+        <input type="text" id="loginEmailPhone" placeholder="Email or phone number" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit" class="login-submit">Continue</button>
+      </form>
+
+      <p class="login-footer">New here? <a href="register.html">Create an account</a></p>
+    </div>
+  </div>
+
+  <script>
+    function openLogin() {
+      document.getElementById('loginOverlay').style.display = 'flex';
+    }
+
+    function closeLogin() {
+      document.getElementById('loginOverlay').style.display = 'none';
+    }
+
+    function overlayClick(event) {
+      if (event.target.id === 'loginOverlay') {
+        closeLogin();
+      }
+    }
+
+    // Validation Logic
+    function validateLogin(event) {
+      event.preventDefault();
+
+      const input = document.getElementById('loginEmailPhone').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+      const phoneRegex = /^[6-9]\d{9}$/; // Indian mobile number format
+
+      if (!emailRegex.test(input) && !phoneRegex.test(input)) {
+        alert("Please enter a valid email or 10-digit mobile number.");
+        return false;
+      }
+
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+      }
+
+      alert("Login successful! (Validation passed)");
+      // Proceed to login or redirect here
+      // Example: window.location.href = "dashboard.html";
+      return true;
+    }
+
+    // Open login popup automatically on page load
+    window.onload = function () {
+      openLogin();
+    };
+  </script>
+</body>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Register</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .register-modal {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .register-modal h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .register-modal p {
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .register-modal input {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .register-submit {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .register-submit:hover {
+      background-color: #45a049;
+    }
+
+    .register-footer {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .register-footer a {
+      color: #4caf50;
+      text-decoration: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #4caf50;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Registration Modal Overlay -->
+  <div class="overlay" id="registerOverlay" onclick="overlayClick(event)">
+    <div class="register-modal">
+      <span class="close-btn" onclick="closeRegister()">×</span>
+      <h2>Create Account</h2>
+      <p>Fill in the details to register</p>
+      <input type="text" id="fullName" placeholder="Full Name" />
+      <input type="email" id="email" placeholder="Email address" />
+      <input type="password" id="password" placeholder="Create Password" />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+      <button class="register-submit" id="registerBtn">Register</button>
+      <p class="register-footer">Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+  </div>
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- JavaScript -->
+  <!-- Replace only the <script> section with this updated version -->
+
+  <script>
+  function openRegister() {
+    document.getElementById('registerOverlay').style.display = 'flex';
+  }
+
+  function closeRegister() {
+    document.getElementById('registerOverlay').style.display = 'none';
+  }
+
+  function overlayClick(event) {
+    if (event.target.id === 'registerOverlay') {
+      closeRegister();
+    }
+  }
+
+  window.onload = function () {
+    openRegister();
+  };
+
+  function showError(inputId, message) {
+    const input = document.getElementById(inputId);
+    let error = input.nextElementSibling;
+    if (!error || !error.classList.contains('error-message')) {
+      error = document.createElement('div');
+      error.className = 'error-message';
+      error.style.color = 'red';
+      error.style.fontSize = '13px';
+      error.style.marginBottom = '10px';
+      input.parentNode.insertBefore(error, input.nextSibling);
+    }
+    error.textContent = message;
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('registerBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      clearErrors();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+      let isValid = true;
+
+      // Validate full name (only alphabets and space, min 3 chars)
+      if (!/^[A-Za-z\s]{3,}$/.test(fullName)) {
+        showError('fullName', 'Name must be at least 3 characters and contain only letters.');
+        isValid = false;
+      }
+
+      // Validate email format
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('email', 'Please enter a valid email address.');
+        isValid = false;
+      }
+
+      // Validate password length
+      if (password.length < 6) {
+        showError('password', 'Password must be at least 6 characters.');
+        isValid = false;
+      }
+
+      // Validate password match
+      if (confirmPassword !== password) {
+        showError('confirmPassword', 'Passwords do not match.');
+        isValid = false;
+      }
+
+      if (!isValid) return;
+
+      // Save user to localStorage
+      const user = { name: fullName, email, password };
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      users.push(user);
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert('Registration successful!');
+      document.getElementById('fullName').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('confirmPassword').value = '';
+    });
+  });
+
+  // Clear users in localStorage from browser console using this:
+  // localStorage.removeItem('users');
+</script>
+
+  
+
+
+</body>
+
+</html>
