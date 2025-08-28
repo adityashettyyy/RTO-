@@ -23,8 +23,8 @@ This portal provides a structured UI with pages for login, registration, license
 4. Navigate through the pages using the provided links.  
 
 ## Future Enhancements  
-- 🔑 Add real authentication system (login/registration with backend)  
-- 🗄️ Integrate database (MySQL/Firebase) for storing records  
-- 📱 Make UI responsive using Bootstrap/Tailwind CSS  
-- ⚡ Deploy online (GitHub Pages, Vercel, or Netlify)  
+-  Add real authentication system (login/registration with backend)  
+-  Integrate database (MySQL/Firebase) for storing records  
+-  Make UI responsive using Bootstrap/Tailwind CSS  
+-  Deploy online (GitHub Pages, Vercel, or Netlify)  
 
