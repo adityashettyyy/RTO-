@@ -1,6 +1,6 @@
-# 🚦 License & Vehicle Management Portal  
+#  License & Vehicle Management Portal  
 
-## 📌 Overview  
+##  Overview  
 A simple **web-based prototype** for managing licenses, vehicle ownership, and traffic-related information.  
 This portal provides a structured UI with pages for login, registration, license details, ownership records, and vehicle details.  
 
