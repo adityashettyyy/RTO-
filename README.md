@@ -4,7 +4,7 @@
 A simple **web-based prototype** for managing licenses, vehicle ownership, and traffic-related information.  
 This portal provides a structured UI with pages for login, registration, license details, ownership records, and vehicle details.  
 
-## 🛠 Tech Stack  
+## Tech Stack  
 - **HTML5** → Page structure  
 - **CSS3** → Styling & layout  
 - **JavaScript** → Form validations & dynamic behaviors  
@@ -22,7 +22,7 @@ This portal provides a structured UI with pages for login, registration, license
 3. Double-click `index.html` or open it in a browser.  
 4. Navigate through the pages using the provided links.  
 
-## 🔮 Future Enhancements  
+## Future Enhancements  
 - 🔑 Add real authentication system (login/registration with backend)  
 - 🗄️ Integrate database (MySQL/Firebase) for storing records  
 - 📱 Make UI responsive using Bootstrap/Tailwind CSS  
